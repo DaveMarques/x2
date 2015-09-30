@@ -12,6 +12,9 @@ float horizon;
 float x, y;       // Position.
 float dx, dy;     // Speed.
 float dogX, dogY;
+float mouthR = 0;     //Mouth Rotation in PI
+
+
 
 //// SETUP:  window size, initialization (start in middle of screen).
 void setup() {
@@ -23,6 +26,8 @@ void setup() {
   dy=  0;
 }
 
+
+
 //// NEXT FRAME:  scene, action, show.
 void draw() {
   scene();
@@ -30,6 +35,8 @@ void draw() {
   dog();
   messages();
 }
+
+
 
 
 void scene() {  
@@ -64,12 +71,16 @@ void scene() {
   
 }
 
+
+
 void messages() {
   fill(255);
   text( title, width/3, 20 );
   text( help, width*2/3, 30 );
   text( author, 10,height-10 );
 }
+
+
 
 //// ACTION:  move (x,y) coordinates of hero & dog; show them.
 void hero() {
@@ -91,10 +102,11 @@ void hero() {
   
   fill(255,200,0);
   if(frameCount % 20 < 10){      //Makes the mouth open and close every 20 frames
-    arc(0, 0, 80, 80, QUARTER_PI, TWO_PI-QUARTER_PI , PIE);    //Puckman Shape Open
+    mouthR = mouthR + (QUARTER_PI/10);    //Puckman Shape Close
   } else{
-    arc(0, 0, 80, 80, 0, TWO_PI, PIE);    //Puckman Shape Closed
+    mouthR = mouthR - (QUARTER_PI/10);    //Puckman Shape Open
   }
+  arc(0, 0, 80, 80, mouthR, TWO_PI - mouthR, PIE);
   
   fill(255,255,255);               //White for Teeth and Eye
   line(0, -30, 10, -20);       //Puckman Eyebrow Line
@@ -114,6 +126,9 @@ void hero() {
   translate(-x,-y);                         //
   
 }
+
+
+
 void dog() {
   dogX=  dogX - (dogX-x)/60;              //Movement of dog "Ghost"
   dogY=  dogY - (dogY-y)/80;
