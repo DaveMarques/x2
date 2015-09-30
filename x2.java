@@ -86,19 +86,25 @@ void hero() {
   translate(x,y);                          //translates to x,y for the rotate
   rotate( atan2( y-dogY,x-dogX));          //
   
-  text( "AHH!", 25, 0 );
+  text( "WOCCA!", 15, 0 );
   text( "Puckman", -30, -45);
-  fill(255,200,0); 
-  arc(0, 0, 80, 80, QUARTER_PI, TWO_PI-QUARTER_PI , PIE);    //Puckman Shape
+  
+  fill(255,200,0);
+  if(frameCount % 20 < 10){      //Makes the mouth open and close every 20 frames
+    arc(0, 0, 80, 80, QUARTER_PI, TWO_PI-QUARTER_PI , PIE);    //Puckman Shape Open
+  } else{
+    arc(0, 0, 80, 80, 0, TWO_PI, PIE);    //Puckman Shape Closed
+  }
+  
   fill(255,255,255);               //White for Teeth and Eye
   line(0, -30, 10, -20);       //Puckman Eyebrow Line
   
   stroke(255, 0, 0);               //makes Teeth and Eye red           
-  triangle(0, 0, 5, -5, 5, 0);
-  triangle(5, 5, 10, 10, 10, 5);                    
-  triangle(10, -10, 15, -15, 15, -10);    //Teeth
-  triangle(15, 15, 20, 20, 20, 15);    
-  triangle(20, -20, 25, -25, 25, -20);    
+  //triangle(0, 0, 5, -5, 5, 0);
+  //triangle(5, 5, 10, 10, 10, 5);          //too lazy to include teeth in animation          
+  //triangle(10, -10, 15, -15, 15, -10);    //Teeth
+  //triangle(15, 15, 20, 20, 20, 15);    
+  //triangle(20, -20, 25, -25, 25, -20);    
   
   ellipse(0, -20, 10, 10);        //Puckman Eye
   point(3, -20);                //Puckman Eye Pupil
