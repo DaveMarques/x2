@@ -52,16 +52,20 @@ void scene() {
   arc(150, horizon-64 , 10, 10, 0, PI, CHORD);
   text( "Don't let him talk to you like that! You are a beautiful tree!", 10, horizon-80 );
     
-  fill(255, 0, 150); rect( width/2-20, horizon-40, 40, 40);              // house
-  fill(255, 0, 50);  triangle( width/2, horizon-60, width/2-30, horizon-40, width/2+30, horizon-40);
+  fill(255, 0, 150);
+  rect( width/2-20, horizon-40, 40, 40);              // house
+  fill(255, 0, 50);
+  triangle( width/2, horizon-60, width/2-30, horizon-40, width/2+30, horizon-40);
 
-  fill(0);text( "My name is Puckman, I live an evil life.", 10,height-20 );
+  fill(0);
+  text( "My name is Puckman, I live an evil life.", 10,height-20 );
   //--fill(255);text( "Created By David Marques", width-150, height-10);
   //--fill(0);
   
 }
 
 void messages() {
+  fill(255);
   text( title, width/3, 20 );
   text( help, width*2/3, 30 );
   text( author, 10,height-10 );
@@ -84,7 +88,8 @@ void hero() {
   
   text( "AHH!", 25, 0 );
   text( "Puckman", -30, -45);
-  fill(255,200,0); arc(0, 0, 80, 80, QUARTER_PI, TWO_PI-QUARTER_PI , PIE);    //Puckman Shape
+  fill(255,200,0); 
+  arc(0, 0, 80, 80, QUARTER_PI, TWO_PI-QUARTER_PI , PIE);    //Puckman Shape
   fill(255,255,255);               //White for Teeth and Eye
   line(0, -30, 10, -20);       //Puckman Eyebrow Line
   
@@ -104,14 +109,36 @@ void hero() {
   
 }
 void dog() {
-  dogX=  dogX - (dogX-x)/30;
-  dogY=  dogY - (dogY-y)/40;
-  text( dogX, 10, 10 );
+  dogX=  dogX - (dogX-x)/60;              //Movement of dog "Ghost"
+  dogY=  dogY - (dogY-y)/80;
+  
+  fill(255);
+  text( dogX, 10, 10 );                   //displays coords of "Dog"
   text( dogY, 10, 20 );
   //
-  fill( 150,0,0 );
-  rect(dogX,dogY, 60,30 );
-  /* INSERT YOUR CODE HERE! */
+  fill( 0, 255, 255 );
+  rect(dogX-30,dogY-1, 60,50 );                //Body of dog "Ghost"
+  arc(dogX, dogY, 60, 60, PI, TWO_PI, OPEN);   //Head of dog "Ghost"
+  noStroke();
+  
+  fill(255);
+  ellipse(dogX-13,dogY,15,15);                 //Whites of eyes of dog
+  ellipse(dogX+13,dogY,15,15);
+  
+  fill(0,0,255);
+  translate(dogX-13, dogY);                    //Left pupil rotation 
+  rotate(atan2(y-dogY,x-dogX));                //towards location of Hero "Puckman"
+  ellipse(4,0,7,7);
+  rotate(-atan2(y-dogY,x-dogX));
+  translate(-(dogX-13), -dogY);
+  
+  translate(dogX+13, dogY);                    //Right pupil rotation 
+  rotate(atan2(y-dogY,x-dogX));                //towards location of Hero "Puckman"
+  ellipse(4,0,7,7);
+  rotate(-atan2(y-dogY,x-dogX));
+  translate(-(dogX+13), -dogY);
+  
+  
 }
 
 
@@ -123,8 +150,8 @@ void mousePressed() {
   x=  mouseX;                             // Set (x,y) to mouse
   y=  mouseY;
   //
-  dx=  random( -6, +6 );                  // random speed.
-  dy=  random( -4, +4 );
+  dx=  random( -8, +8 );                  // random speed.
+  dy=  random( -5, +5 );
 }
 
 void keyPressed() {
